@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.ACR_PASSWORD }}
         
     - name: Debug - Print Start of AZURE_CREDENTIALS
-      run: echo "${{ secrets.AZURE_CREDENTIALS }}" | head -c 30
+      run: echo "${{ secrets.AZURE_CREDENTIALS }}"
 
     - name: 📃 Set AKS context
       uses: azure/aks-set-context@v1

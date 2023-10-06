@@ -32,12 +32,16 @@ jobs:
         username: ${{ secrets.ACR_USER }}  
         password: ${{ secrets.ACR_PASSWORD }}
         
-    - name: 📃 Set AKS context
-      uses: azure/aks-set-context@v1
+    - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        cluster-name: ${{ env.AZURE_AKS_CLUSTER }}
-        resource-group: ${{ env.AKS_RESOURCE_GROUP }}
+
+    - uses: azure/aks-set-context@v3
+      with:
+        resource-group: 'dfcu_demo'
+        cluster-name: 'DFCUDemo"'
+        admin: 'false'
+        use-kubelogin: 'true'
 
     - name: 🌐 Install ingress-nginx
       run: |

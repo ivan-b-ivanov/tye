@@ -16,7 +16,7 @@ jobs:
     - name: ✔ Checkout
       uses: actions/checkout@v2
 
-    - name: 🧰 Setup .NET Core
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.300

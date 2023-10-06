@@ -36,6 +36,7 @@ jobs:
       uses: azure/aks-set-context@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+        run: echo "${{ secrets.AZURE_CREDENTIALS }}" | head -c 30
         cluster-name: ${{ env.AZURE_AKS_CLUSTER }}
         resource-group: ${{ env.AKS_RESOURCE_GROUP }}
 

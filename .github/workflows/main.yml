@@ -3,9 +3,9 @@ name: Build and Deploy
 on: [push]
 
 env:
-  AZURE_AKS_CLUSTER: myaksclustername
-  AKS_RESOURCE_GROUP: myaksresourcegroup
-  ACR_RESOURCE_URI: myregistry.azurecr.io
+  AZURE_AKS_CLUSTER: "DFCUDemo"
+  AKS_RESOURCE_GROUP: "dfcu_demo"
+  ACR_RESOURCE_URI: "acrworkflow1696580578689.azurecr.io"
 
 jobs:
   build:

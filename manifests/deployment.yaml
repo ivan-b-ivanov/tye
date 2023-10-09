@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dfcu-demo
+  labels:
+    app: dfcu-demo
+  namespace: namespace-workflow-1696858778890
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dfcu-demo
+  template:
+    metadata:
+      labels:
+        app: dfcu-demo
+    spec:
+      containers:
+        - name: dfcu-demo
+          image: acrworkflow1696858778890.azurecr.io/image-workflow-1696858778890:latest
+          ports:
+            - containerPort: 5000

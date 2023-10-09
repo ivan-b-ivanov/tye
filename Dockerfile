@@ -1,6 +1,10 @@
+
 # Builder Stage
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS builder
 WORKDIR /app
+
+# Copy Directory.Build.props to the root of the container
+COPY src/Directory.Build.props /Directory.Build.props
 
 # Copy the entire source directory
 COPY src/ ./src/

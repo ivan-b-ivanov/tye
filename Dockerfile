@@ -1,19 +1,23 @@
+# Builder Stage
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS builder
 WORKDIR /app
 
-# caches restore result by copying csproj file separately
-COPY src/tye/*.csproj ./
-RUN dotnet restore
+# Copy the entire source directory
+COPY src/ ./src/
 
-COPY src/tye/ ./
-RUN dotnet publish --output /app/ --configuration Release --no-restore
+# Adjust the working directory to the main project
+WORKDIR /app/src/tye
+
+RUN dotnet restore
+RUN dotnet publish --output /out/ --configuration Release --no-restore
+
 RUN sed -n 's:.*<AssemblyName>\(.*\)</AssemblyName>.*:\1:p' *.csproj > __assemblyname
 RUN if [ ! -s __assemblyname ]; then filename=$(ls *.csproj); echo ${filename%.*} > __assemblyname; fi
 
-# Stage 2
+# Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=builder /app .
+COPY --from=builder /out .
 
 ENV PORT 5000
 EXPOSE 5000

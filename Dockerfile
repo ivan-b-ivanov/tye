@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./src/*.csproj ./
 RUN dotnet restore
 
-COPY . .
+COPY ./src/*.csproj ./
 RUN dotnet publish --output /app/ --configuration Release --no-restore
 RUN sed -n 's:.*<AssemblyName>\(.*\)</AssemblyName>.*:\1:p' *.csproj > __assemblyname
 RUN if [ ! -s __assemblyname ]; then filename=$(ls *.csproj); echo ${filename%.*} > __assemblyname; fi
